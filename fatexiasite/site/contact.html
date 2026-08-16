@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+  (function () {
+    try {
+      if (localStorage.getItem('fatexia-theme') === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+    } catch (e) {}
+  })();
+</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact | Olanipekun Fatai</title>
+<meta name="description" content="Tell me about your channel and I'll get back to you within a day or two.">
+<link rel="icon" href="images/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="site-nav">
+  <a class="site-nav__brand" href="index.html"><img class="site-nav__logo" src="images/logo.webp" alt="Fatexia logo">Olanipekun Fatai</a>
+  <div class="site-nav__links">
+    <a class="nav-link" href="index.html">Home</a>
+    <a class="nav-link" href="services.html">Services</a>
+    <a class="nav-link" href="portfolio.html">Portfolio</a>
+    <a class="nav-link" href="about.html">About</a>
+    <a class="nav-link active" href="contact.html">Contact</a>
+  </div>
+  <div class="site-nav__actions">
+    <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle black-and-white mode" aria-pressed="false">
+    <span class="theme-toggle__thumb">
+      <svg class="theme-toggle__icon theme-toggle__icon--sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><line x1="12" y1="1" x2="12" y2="4"></line><line x1="12" y1="20" x2="12" y2="23"></line><line x1="4.2" y1="4.2" x2="6.3" y2="6.3"></line><line x1="17.7" y1="17.7" x2="19.8" y2="19.8"></line><line x1="1" y1="12" x2="4" y2="12"></line><line x1="20" y1="12" x2="23" y2="12"></line><line x1="4.2" y1="19.8" x2="6.3" y2="17.7"></line><line x1="17.7" y1="6.3" x2="19.8" y2="4.2"></line></svg>
+      <svg class="theme-toggle__icon theme-toggle__icon--moon" viewBox="0 0 24 24" fill="currentColor"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path></svg>
+    </span>
+  </button>
+    <a class="btn btn-primary btn-primary--nav" href="contact.html">Book a Call</a>
+  </div>
+</nav>
+
+<main class="page-container">
+  <div class="contact-layout">
+    <div class="contact-layout__intro">
+      <h1>Let's talk about your channel</h1>
+      <p>Tell me a bit about what you're working on and I'll get back to you within a day or two.</p>
+      <div class="contact-info">
+        <div>
+          <div class="contact-info__label">Email</div>
+          <a class="contact-info__value" href="mailto:olanipekunfatai2@gmail.com">olanipekunfatai2@gmail.com</a>
+        </div>
+        <div>
+          <div class="contact-info__label">Discord</div>
+          <span class="contact-info__value">fatexia</span>
+        </div>
+        <div>
+          <div class="contact-info__label">Upwork</div>
+          <a class="contact-info__value" href="https://www.upwork.com/freelancers/~013f538210e266b35d?mp_source=share" target="_blank" rel="noopener">View Profile</a>
+        </div>
+      </div>
+    </div>
+
+    <form class="contact-form" id="contact-form" action="https://formsubmit.co/olanipekunfatai2@gmail.com" method="POST">
+      <input type="hidden" name="_subject" value="New inquiry from portfolio site">
+      <input type="hidden" name="_template" value="table">
+      <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+      <div class="form-fields">
+        <div class="form-field">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" placeholder="Your name" required>
+        </div>
+        <div class="form-field">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="you@example.com" required>
+        </div>
+        <div class="form-field">
+          <label for="channel">Channel link</label>
+          <input type="text" id="channel" name="channel" placeholder="youtube.com/... or twitch.tv/...">
+        </div>
+        <div class="form-field">
+          <label for="message">What do you need help with?</label>
+          <textarea id="message" name="message" placeholder="Tell me a bit about your channel and your goals" rows="4"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Send Message</button>
+        <div class="form-status" id="form-status" role="status" aria-live="polite"></div>
+      </div>
+    </form>
+  </div>
+</main>
+
+<script>
+  (function () {
+    var form = document.getElementById('contact-form');
+    var status = document.getElementById('form-status');
+    var endpoint = 'https://formsubmit.co/ajax/olanipekunfatai2@gmail.com';
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var btn = form.querySelector('button[type="submit"]');
+      status.textContent = '';
+      status.className = 'form-status';
+      btn.disabled = true;
+      btn.textContent = 'Sending…';
+
+      fetch(endpoint, {
+        method: 'POST',
+        headers: { Accept: 'application/json' },
+        body: new FormData(form),
+      })
+        .then(function (res) {
+          if (!res.ok) throw new Error('Request failed');
+          form.reset();
+          status.textContent = "Thanks! Your message is on its way. I'll get back to you within a day or two.";
+          status.classList.add('form-status--success');
+        })
+        .catch(function () {
+          status.textContent = 'Something went wrong sending your message. Please email olanipekunfatai2@gmail.com directly instead.';
+          status.classList.add('form-status--error');
+        })
+        .finally(function () {
+          btn.disabled = false;
+          btn.textContent = 'Send Message';
+        });
+    });
+  })();
+</script>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+    var toggle = document.getElementById('theme-toggle');
+    if (!toggle) return;
+
+    function syncToggleState() {
+      toggle.setAttribute('aria-pressed', root.getAttribute('data-theme') === 'dark' ? 'true' : 'false');
+    }
+    syncToggleState();
+
+    toggle.addEventListener('click', function () {
+      if (root.getAttribute('data-theme') === 'dark') {
+        root.removeAttribute('data-theme');
+        try { localStorage.setItem('fatexia-theme', 'light'); } catch (e) {}
+      } else {
+        root.setAttribute('data-theme', 'dark');
+        try { localStorage.setItem('fatexia-theme', 'dark'); } catch (e) {}
+      }
+      syncToggleState();
+    });
+  })();
+</script>
+
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <div class="site-footer__col site-footer__col--brand">
+      <a class="site-footer__brand" href="index.html"><img class="site-footer__logo" src="images/logo.webp" alt="Fatexia logo">Olanipekun Fatai</a>
+      <p class="site-footer__tagline">Helping YouTube &amp; Twitch creators grow with SEO, editing, monetization, branding and community management.</p>
+      <div class="site-footer__social">
+        <a href="#" aria-label="Discord: fatexia" title="Discord: fatexia"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.419 2.157-2.419 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.419-2.1569 2.419zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.419 2.1569-2.419 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.419-2.1568 2.419Z"></path></svg></a>
+        <a href="https://www.upwork.com/freelancers/~013f538210e266b35d?mp_source=share" target="_blank" rel="noopener" aria-label="Upwork"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.561 13.158c-1.102 0-2.135-.467-3.074-1.227l.228-1.076.008-.042c.207-1.143.849-3.06 2.839-3.06 1.492 0 2.703 1.212 2.703 2.703-.001 1.489-1.212 2.702-2.704 2.702zm0-8.14c-2.539 0-4.51 1.649-5.31 4.366-1.222-1.834-2.155-4.03-2.699-5.884H7.87v7.352c-.002 1.398-1.14 2.532-2.54 2.532-1.399 0-2.537-1.136-2.537-2.535V3.5H0v7.347c0 2.75 2.235 5.03 4.985 5.03 2.75 0 4.985-2.28 4.985-5.03v-1.23c.489 1.02 1.09 2.049 1.822 2.958l-1.596 7.514h2.768l1.161-5.466c1.148.734 2.472 1.177 3.973 1.177C22.194 15.8 24 13.995 24 11.585c0-2.412-1.806-4.567-4.32-4.567l-1.119.001z"></path></svg></a>
+        <a href="mailto:olanipekunfatai2@gmail.com" aria-label="Email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></a>
+      </div>
+    </div>
+    <div class="site-footer__col">
+      <div class="site-footer__col-title">Menu</div>
+      <a href="index.html">Home</a>
+      <a href="services.html">Services</a>
+      <a href="portfolio.html">Portfolio</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="site-footer__col">
+      <div class="site-footer__col-title">Services</div>
+      <a href="services.html">YouTube SEO &amp; Promotion</a>
+      <a href="services.html">Video Editing</a>
+      <a href="services.html">Monetization</a>
+      <a href="services.html">Twitch Marketing</a>
+      <a href="services.html">Community Management</a>
+    </div>
+    <div class="site-footer__col">
+      <div class="site-footer__col-title">Contact</div>
+      <a href="mailto:olanipekunfatai2@gmail.com">olanipekunfatai2@gmail.com</a>
+      <a class="btn btn-primary btn-primary--nav site-footer__cta" href="contact.html">Book a Call</a>
+    </div>
+  </div>
+  <div class="site-footer__bottom">
+    <div class="site-footer__copy">© 2026 Olanipekun Fatai. All rights reserved.</div>
+  </div>
+</footer>
+
+</body>
+</html>
